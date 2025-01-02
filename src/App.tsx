@@ -42,95 +42,97 @@ function App() {
   const cumulativeEffect = calculateCumulativeEffect();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-4 md:p-6 lg:p-8">
-      <div className="max-w-2xl mx-auto space-y-6">
+    <div className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-4 md:p-8 lg:p-10">
+      <div className="max-w-3xl mx-auto space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3">
             OCD Recovery Simulator
           </h1>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-gray-600 dark:text-gray-300 text-lg">
             Visualize your recovery journey through data
           </p>
         </div>
 
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <span>Parameters</span>
-              <Info className="w-4 h-4 text-gray-400" />
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <SliderGroup
-              label="Struggle Intensity"
-              description="Rate the intensity of your struggles"
-              value={struggle}
-              onChange={setStruggle}
-              min={1}
-              max={10}
-            />
-            <SliderGroup
-              label="Duration"
-              description="How long each episode typically lasts"
-              value={duration}
-              onChange={setDuration}
-              min={1}
-              max={10}
-            />
-            <SliderGroup
-              label="Frequency"
-              description="How often episodes occur"
-              value={frequency}
-              onChange={setFrequency}
-              min={1}
-              max={10}
-            />
-            <SliderGroup
-              label="Time Period"
-              description="Number of days to simulate"
-              value={daysApplied}
-              onChange={setDaysApplied}
-              min={1}
-              max={365}
-            />
-            <SliderGroup
-              label="Learning Rate"
-              description="Daily improvement percentage"
-              value={learningMultiplier}
-              onChange={setLearningMultiplier}
-              min={1}
-              max={10}
-            />
-          </CardContent>
-        </Card>
+        <div className="grid md:grid-cols-2 gap-8">
+          <Card className="shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-xl">
+                <span>Parameters</span>
+                {/* <Info className="w-5 h-5 text-gray-400" /> */}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-8">
+              <SliderGroup
+                label="Struggle Intensity"
+                description="The difficulty of the exposure exercise"
+                value={struggle}
+                onChange={setStruggle}
+                min={1}
+                max={10}
+              />
+              <SliderGroup
+                label="Duration"
+                description="The duration of the exposure exercise"
+                value={duration}
+                onChange={setDuration}
+                min={1}
+                max={10}
+              />
+              <SliderGroup
+                label="Frequency"
+                description="How often the exposure exercise is performed"
+                value={frequency}
+                onChange={setFrequency}
+                min={1}
+                max={10}
+              />
+              <SliderGroup
+                label="Time Period"
+                description="Number of days to simulate"
+                value={daysApplied}
+                onChange={setDaysApplied}
+                min={1}
+                max={365}
+              />
+              <SliderGroup
+                label="Learning Rate"
+                description="Daily improvement percentage"
+                value={learningMultiplier}
+                onChange={setLearningMultiplier}
+                min={1}
+                max={5}
+              />
+            </CardContent>
+          </Card>
 
-        <Card className="shadow-lg bg-white dark:bg-gray-800">
-          <CardHeader>
-            <CardTitle>Simulation Results</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-700">
-              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                Daily Response Score
-              </h3>
-              <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                {addNumberSeparator(response)}
-              </p>
-            </div>
+          <Card className="shadow-lg bg-white dark:bg-gray-800">
+            <CardHeader>
+              <CardTitle className="text-xl">Simulation Results</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="p-6 rounded-lg bg-gray-50 dark:bg-gray-700">
+                <h3 className="text-base font-medium text-gray-500 dark:text-gray-400">
+                  Daily Response Score
+                </h3>
+                <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                  {addNumberSeparator(response)}
+                </p>
+              </div>
 
-            <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-700">
-              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                Cumulative Effect
-              </h3>
-              <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                {addNumberSeparator(Math.round(cumulativeEffect))}
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                Over {convertDaysAppliedToDaysMonthsAndYears(daysApplied)}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="p-6 rounded-lg bg-gray-50 dark:bg-gray-700">
+                <h3 className="text-base font-medium text-gray-500 dark:text-gray-400">
+                  Cumulative Effect
+                </h3>
+                <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">
+                  {addNumberSeparator(Math.round(cumulativeEffect))}
+                </p>
+                <p className="text-base text-gray-500 dark:text-gray-400 mt-2">
+                  Over {convertDaysAppliedToDaysMonthsAndYears(daysApplied)}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
@@ -152,16 +154,16 @@ function SliderGroup({
   max: number;
 }) {
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       <div className="flex justify-between items-baseline">
-        <Label className="text-sm font-medium">
+        <Label className="text-base font-medium">
           {label}
         </Label>
-        <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
+        <span className="text-base font-bold text-blue-600 dark:text-blue-400">
           {value}
         </span>
       </div>
-      <p className="text-xs text-gray-500 dark:text-gray-400">
+      <p className="text-sm text-gray-500 dark:text-gray-400">
         {description}
       </p>
       <Slider
@@ -170,7 +172,7 @@ function SliderGroup({
         max={max}
         step={1}
         onValueChange={(val) => onChange(val[0])}
-        className="mt-2"
+        className="mt-3"
       />
     </div>
   );
