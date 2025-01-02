@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Info } from "lucide-react";
 
 function App() {
   const [struggle, setStruggle] = useState(5);
